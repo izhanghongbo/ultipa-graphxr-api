@@ -102,7 +102,7 @@ The Grove interface provides an intuitive way to explore your graph data through
 use your own project:
 
 1. create a new project https://graphxr.kineviz.com/  with a grove template
-![Create Project](https://raw.githubusercontent.com/izhanghongbo/ultipa-graphxr-api/main/images/project-add.jpg)
+![Create Project](https://github.com/izhanghongbo/ultipa-graphxr-api/blob/main/images/project-new.jpg)
 
 2. download the grove file [ultipa-graph.grove](https://raw.githubusercontent.com/izhanghongbo/ultipa-graphxr-api/main/ultipa-graph.grove)
 3. open the grove tab and drag the code into the panel,you will see the grove's ui in the panel
