@@ -1,0 +1,3 @@
+samples:
+  - name: "Find 10 nodes and their relationships"
+    command: "n().re().n() as p return p{*} limit 10"
