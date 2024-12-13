@@ -81,7 +81,7 @@ A FastAPI-based REST API service for interacting with Ultipa Graph Database.
 
 After starting the service, you can use Grove to visualize and interact with your graph data:
 
-use a shared project:
+### use a shared project:
 
 1. Open the Grove interface at [GraphXR Grove](https://graphxr.kineviz.com/share/67595c55bcdae6c322c58738/Grove?userID=5c020fe520f1ed00216552c3&groveProjectId=67595c55bcdae6c322c58738&groveFileKey=ultipa-graph&groveVersion=0&groveFullscreen=true&groveReadonly=true&groveBlockMode=hide)
 
@@ -99,10 +99,10 @@ use a shared project:
 
 The Grove interface provides an intuitive way to explore your graph data through a visual interface while using the API endpoints described above.
 
-use your own project:
+### use your own project:
 
 1. create a new project https://graphxr.kineviz.com/  with a grove template
-![Create Project](https://github.com/izhanghongbo/ultipa-graphxr-api/blob/main/images/project-new.jpg)
+![Create Project](https://raw.githubusercontent.com/izhanghongbo/ultipa-graphxr-api/refs/heads/main/images/project-new.jpg)
 
 2. download the grove file [ultipa-graph.grove](https://raw.githubusercontent.com/izhanghongbo/ultipa-graphxr-api/main/ultipa-graph.grove)
 3. open the grove tab and drag the code into the panel,you will see the grove's ui in the panel
