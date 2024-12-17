@@ -6,6 +6,8 @@ import os
 from ultipa import Connection, UltipaConfig
 from ultipa.configuration.RequestConfig import RequestConfig
 import yaml
+import re
+
 
 class ExecuteRequest(BaseModel):
     command: str
@@ -33,10 +35,10 @@ async def get_schema(request: Request, graphName: str = None):
         schemas = conn.showSchema(requestConfig)
         nodes = []
         relationships = []
-        for schema in schemas:
-            if schema.type == "node":
+        for schema in schemas['schemas']:
+            if schema.DBType == 0:
                 nodes.append(schema.name)
-            elif schema.type == "edge":
+            elif schema.DBType == 1:
                 relationships.append(schema.name)
 
         return {
@@ -53,11 +55,22 @@ async def get_schema(request: Request, graphName: str = None):
 async def execute(request: ExecuteRequest):
     try:
         command = request.command
+        query = command.strip().lower()
+        queryLan = "UQL"
+        gql_patterns = [
+        r"\bmatch\b", r"\b(create|merge|delete|set|remove)\b"
+        ]
+
+        gql_match = any(re.search(pattern, query) for pattern in gql_patterns)
+        if gql_match :
+           queryLan = "GQL"
         request_config = RequestConfig(graphName=request.graphName if request.graphName else ultipaConfig.defaultGraph)
         
         # Execute query
-        result = conn.uql(command, request_config)
-        
+        if queryLan == 'GQL':
+            result = conn.gql(command, request_config)
+        else:
+            result = conn.uql(command, request_config)    
         # Initialize graph data structure
         graph_data = {
             "nodes": [],
@@ -78,7 +91,7 @@ async def execute(request: ExecuteRequest):
                 if item.type == "NODE":
                     for node in item.data:
                         graph_node = {
-                            "id": node.id,
+                            "id": node._id,
                             "category": node.schema,
                             "properties": node.values
                         }
@@ -95,12 +108,12 @@ async def execute(request: ExecuteRequest):
                         }
                         graph_data["edges"].append(graph_edge)
                 
-                elif item.type == "PATH":
+                elif item.type == "PATH" or item.type == "Graph":
                     for path in item.data:
                         # Process nodes in the path
                         for node in path.nodes:
                             graph_node = {
-                                "id": node.id,
+                                "id": node._id,
                                 "category": node.schema,
                                 "properties": node.values
                             }

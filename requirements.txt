@@ -28,6 +28,6 @@ treelib==1.7.0
 typing_extensions==4.12.2
 tzdata==2024.2
 tzlocal==4.2
-ultipa==4.5.2
+ultipa==5.0.2
 uvicorn==0.32.1
 wcwidth==0.2.13
